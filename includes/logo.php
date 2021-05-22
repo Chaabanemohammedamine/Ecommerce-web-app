@@ -41,7 +41,7 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">0 produit(s) </a>
+                    <a class="dropdown-item" href="cart.php"><?php echo !empty($_SESSION['count']) ? $_SESSION['count'] : "" ?>produit(s) </a>
                 </div>
             </div>
         </div>
