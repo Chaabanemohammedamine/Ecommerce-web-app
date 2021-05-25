@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 require('config.php');
 
 function redirect($location){
@@ -26,8 +28,9 @@ function logout(){
 }
 
 function empty_cart($id,$price){
-    unset($_SESSION['products_'.$id]);
+    unset($_SESSION['products'.$id]);
     $_SESSION['count'] -= 1;
     $_SESSION['totaux'] -= $price;
     redirect("cart.php");
 }
+

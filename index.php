@@ -18,7 +18,7 @@
                                 ?>
                                 <div class="card">
                                     <div class="card-bady">
-                                        <div class="card-img-top">
+                                        <div class="card-img-top ">
                                             <img src="<?php echo $row['product_image']; ?>" class="img-fluid" alt="">
                                         </div>
                                         <div class="ml-4">

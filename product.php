@@ -31,7 +31,7 @@
                                     <label for="qte">Qté*</label>
                                     <input type="number" name="qte" style="width:20%;" class="form-control" value="1">
                                     <input type="hidden" name="product" value="<?php echo $row['product_title'];?> ">
-                                    <input type="hidden" name="id   " value="<?php echo $row['product_id'];?> ">
+                                    <input type="hidden" name="id" value="<?php echo $row['product_id'];?> ">
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-cart-arrow-down"></i>
                                     Ajouter au

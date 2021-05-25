@@ -12,8 +12,7 @@
                             <div class="card-deck">
                                 <?php
                                    $search = isset($_POST['search']) ?  escape_string($_POST['search']) : "";
-                                   $sql = "SELECT * FROM products WHERE product_title LIKE = '%search%' 
-                                      OR product_description LIKE = '%search%' ";
+                                   $sql = 'SELECT * FROM products WHERE product_title LIKE "%' .$search.'%" OR product_description LIKE "%'.$search.'%"';
                                    $result = query($sql);
                                    if($count = mysqli_num_rows($result) > 0):
                                    while($row =  fetch_array($result)):

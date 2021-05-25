@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 22 mai 2021 à 22:18
+-- Généré le : mar. 25 mai 2021 à 10:56
 -- Version du serveur :  10.4.19-MariaDB
 -- Version de PHP : 8.0.6
 
@@ -37,10 +37,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
-(1, 'T-shirt'),
-(2, 'Pantalon'),
-(3, 'Capuche'),
-(4, 'Espadrille');
+(1, 'Pc_Portable'),
+(2, 'Sourie'),
+(3, 'Clavier'),
+(4, 'Ventilateur');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_title`, `product_category_id`, `product_price`, `old_price`, `product_quantity`, `product_description`, `short_desc`, `product_image`) VALUES
-(1, 'Espadrille', 4, 500, 700, 1, 'Espadrille Nike Sport', 'Nike Sport', 'img/NikeSport.jpg');
+(1, 'Pc_Portable', 1, 3500, 4000, 10, ' Ordinateur Portable Lenovo ThinkPad X1 Carbon (20QD002RFE) Cor i5 ', '', 'img/lenovo.jpg'),
+(2, 'Ventilateur_PC Portable', 4, 700, 1000, 20, 'Le Wind PAL FS est un pour PC portable (jusqu\'à 17 pouces) composé de 2 ventilateurs de 140 mm et d\'un hub USB standard avec deux ports intégrés, qui peut être commode lors de vos besoins de périphériques USB externes. ', '', 'img/ventilateur.jpg');
 
 -- --------------------------------------------------------
 
@@ -147,7 +148,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `users`
