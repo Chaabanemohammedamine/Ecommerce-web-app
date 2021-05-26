@@ -1,52 +1,77 @@
-<?php include('includes/header.php');?>
+<?php include 'inc/header.php'; ?>
 
-<div class="container">
-<div class="card main bg-light">
-        <?php include('includes/logo.php');?>
-        <?php include('includes/navigation.php');?>
-        <div class="col-md-12">
-            <div class="card mt-4 p-1">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-deck">
-                            <?php
-                                   $query = "SELECT * FROM products ";
-                                   $result = query($query);
-                                   while($row =  fetch_array($result)):
-                                ?>
-                                <div class="card">
-                                    <div class="card-bady">
-                                        <div class="card-img-top">
-                                            <img src="<?php echo $row['product_image']; ?>" class="img-fluid" alt="">
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="card-title"><?php echo $row['product_title']; ?>
-                                            </h4>
-                                            <p><span
-                                                    class="badge badge-success"><?php echo $row['product_price'].'DH'; ?></span>
-                                                <span
-                                                    class="text-danger"><strike><?php echo $row['old_price'].'DH'; ?></strike></span>
-                                            </p>
-                                            <p class="lead card-text"><?php echo $row['short_desc']; ?>
-                                            </p>
-                                            <p><a href="product.php?id=<?php echo $row['product_id']; ?>" class="btn btn-outline-dark">Voir</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                                   endwhile;
-                                ?>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer style="background-color: #e3f2fd;" class="mt-2">
-            <p class="lead text-center  mt-2">AmineShop&copy;2021</p>
-        </footer>
+ <div class="main">
+    <div class="content">
+    	<div class="content_top">
+    		<div class="heading">
+    		<h3>Latest from Iphone</h3>
+    		</div>
+    		<div class="clear"></div>
+    	</div>
+	      <div class="section group">
+				<div class="grid_1_of_4 images_1_of_4">
+					 <a href="preview-3.php"><img src="images/feature-pic1.png" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					 <p><span class="price">$505.22</span></p>
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+					<a href="preview-2.php"><img src="images/feature-pic2.jpg" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					 <p><span class="price">$620.87</span></p> 
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+					<a href="preview-4.php"><img src="images/feature-pic3.jpg" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					 <p><span class="price">$220.97</span></p>
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+					<img src="images/feature-pic4.png" alt="" />
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					 <p><span class="price">$415.54</span></p> 
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+			</div>
+			<div class="content_bottom">
+    		<div class="heading">
+    		<h3>Latest from Acer</h3>
+    		</div>
+    		<div class="clear"></div>
+    	</div>
+			<div class="section group">
+				<div class="grid_1_of_4 images_1_of_4">
+					 <a href="preview-3.php"><img src="images/new-pic1.jpg" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p><span class="price">$403.66</span></p>
+				    
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+					<a href="preview-4.php"><img src="images/new-pic2.jpg" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p><span class="price">$621.75</span></p>
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+					<a href="preview-2.php"><img src="images/feature-pic2.jpg" alt="" /></a>
+					 <h2>Lorem Ipsum is simply </h2>
+					 <p><span class="price">$428.02</span></p>
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+				<div class="grid_1_of_4 images_1_of_4">
+				 <img src="images/new-pic3.jpg" alt="" />
+					 <h2>Lorem Ipsum is simply </h2>					 
+					 <p><span class="price">$457.88</span></p>   
+				     <div class="button"><span><a href="preview.php" class="details">Details</a></span></div>
+				</div>
+			</div>
     </div>
-    <?php include('includes/footer.php');?>
+ </div>
+<?php include 'inc/footer.php'; ?>
+

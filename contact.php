@@ -1,36 +1,44 @@
-<?php include('includes/header.php');?>
-
-<div class="container">
-    <div class="card main bg-light">
-        <?php include('includes/logo.php');?>
-        <?php include('includes/navigation.php');?>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-header bg-info text-white text-center"><i class="fa fa-envelope"></i> Contact
-                        </h5>
-                        <form action="contact.php" method="post" class="mt-2">
-                            <div class="form-group">
-                                <label for="email">Email*</label>
-                                <input type="email" name="email" placeholder="Entrer votre Email" class="form-control">
+<?php include 'inc/header.php'; ?>
+<?php include 'inc/notification.php'; ?>
+ <div class="main">
+    <div class="content">
+    	<div class="support">
+  			<div class="support_desc">
+  				<h3>Live Support</h3>
+  				<p> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+  			</div>
+  				<img src="web/images/contact.png" alt="" />
+  			<div class="clear"></div>
+  		</div>
+    	<div class="section group">
+				<div class="col span_2_of_3">
+				  <div class="contact-form">
+				  	<h2>Contact Us</h2>
+					  <form action="phpmailer/index.php" method="POST">
+                            <div>
+                                <span><label>NAME</label></span>
+                                <span><input type="text" value="" name="name"></span>
                             </div>
-                            <div class="form-group">
-                                <label for="message"> Message</label>
-                                <textarea name="message" class="form-control" id="" cols="30" rows="10"
-                                    placeholder="Message"></textarea>
+                            <div>
+                                <span><label>E-MAIL</label></span>
+                                <span><input type="text" value="" name="email"></span>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Valider</button>
+                            <div>
+                                 <span><label>MOBILE.NO</label></span>
+                                <span><input type="text" value="" name="tel" ></span>
                             </div>
+                            <div>
+                                <span><label>SUBJECT</label></span>
+                                <span><textarea name="message" > </textarea></span>
+                            </div>
+                           <div>
+                                   <span><input type="submit"  value="SUBMIT"></span>
+                          </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer style="background-color: #e3f2fd;" class="mt-2">
-            <p class="lead text-center  mt-2">AmineShop&copy;2021</p>
-        </footer>
+				  </div>
+  				</div>
 
+			  </div>    	
     </div>
-    <?php include('includes/footer.php');?>
+ </div>
+<?php include 'inc/footer.php'; ?>

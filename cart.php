@@ -1,99 +1,110 @@
-<?php
- include('includes/header.php');
-?>
+<?php include 'inc/header.php'; ?>
 
-<div class="container">
-    <div class="card main bg-light">
-        <?php include('includes/logo.php');?>
-        <?php include('includes/navigation.php');?>
-        <div class="row">
-            <div class="col-md-12">
-            <?php
-              if(isset($_GET['message'])){
-                  echo' <div class="alert alert-danger p-2 mt-2">'.$_GET['message'].'</div>';
-              }
-            ?>
-                <div class="card mt-2 mb-3 mx-2">
-                    <table class="table table-hover">
-                
-                        <thead>
-                            <th>Produit</th>
-                            <th>Prix</th>
-                            <th>Quantité</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                        <?php
-                              foreach($_SESSION as $name => $product):
-                            ?>
-                        <?php
-                              if(substr($name,0,8) == "products"):
-                                
-                            ?>
-                            <tr>
-                            <td>
-                                <?php echo !empty($product['product']) ? $product['product'] : "" ?>
-                            </td>
-                            <td>
-                                <?php echo !empty($product['price']) ? $product['price'] : ""  ?>
-                            </td>
-                            <td>
-                                <?php echo !empty($product['qte']) ? $product['qte'] : ""  ?>
-                            </td> 
-                            <td>
-                                <?php echo !empty($product['total']) ? $product['total'] : ""  ?>
-                            </td>
-                            <td>
-                                <a href="cancel_cart.php?id=<?php echo !empty($product['id']) ? $product['id'] : "" ?>&price=<?php echo !empty($product['total']) ? $product['total'] : ""?> "
-                                    class="btn btn-danger"> <i class="fa fa-trash"></i></a>
-                            </td>
-                            </tr>
-                    <?php
-                              endif; 
-                            ?>
-                    <?php
-                             endforeach;
-                            ?>
-                      </tbody>
-                        </table>          
-                </div>
-                <div class="row">
-                    <div class="col-md-4 ml-auto mt-2 mb-3 mx-2">
-                        <table class="table table-bordered">
-                            <thead>
-                                <th>Produits</th>
-                                <th>Total HT</th>
-                            </thead>
-                            <tbody>
-                                <td>
-                                    <?php echo !empty($_SESSION['count']) ? $_SESSION['count'] : "" ?>
-                                </td>
-                                <td class="text-danger font-weight-bold">
-                                    <?php echo !empty($_SESSION['totaux']) ? $_SESSION['totaux'].' DH' : "" ?>
-                                </td>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer style="background-color: #e3f2fd;" class="mt-2">
-            <p class="lead text-center  mt-2">AmineShop&copy;2021</p>
-        </footer>
-    </div>
-</div>
-<script>
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      // This function sets up the details of the transaction, including the amount and line item details.
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '0.01'
-          }
-        }]
-      });
+<?php 
+if (isset($_GET['delpro'])) {
+    $delProId = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['delpro']);
+    $delProduct = $ct->delProductByCart($delProId);
+}
+ ?>
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cartId = $_POST['cartId'];
+    $quantity = $_POST['quantity'];
+    $updateCart = $ct->updateCartQuantity($cartId, $quantity);
+    if ($quantity <= 0) {
+        $delProduct = $ct->delProductByCart($cartId);
     }
-  }).render('#paypal-button-container');
-</script> 
+}
+ ?>
+ <?php 
+if (!isset($_GET['id'])) {
+    echo "<meta http-equiv='refresh' content='0;URL=?id=live'/>";
+}
+  ?>
+ <div class="main">
+    <div class="content">
+    	<div class="cartoption">		
+			<div class="cartpage">
+			    	<h2>Your Cart</h2>
+			    	<?php if (isset($updateCart)) {
+      echo $updateCart;
+  }
+if (isset($delProduct)) {
+    echo $delProduct;
+}
+  ?>
+						<table class="tblone">
+							<tr>
+								<th width="5%">Sl</th>
+								<th width="30%">Product Name</th>
+								<th width="10%">Image</th>
+								<th width="15%">Price</th>
+								<th width="15%">Quantity</th>
+								<th width="15%">Total Price</th>
+								<th width="10%">Action</th>
+							</tr>
+							<?php 
+                            $getPro = $ct->getCartProduct();
+                            if ($getPro) {
+                                $i=0;
+                                $sum = 0;
+                                $qty = 0;
+                                while ($result = $getPro->fetch_assoc()) {
+                                    $i++; ?>
+							<tr>
+								<td><?php echo $i; ?></td>
+								<td><?php echo $result['productName']; ?></td>
+								<td><img src="admin/<?php echo $result['image']; ?>" alt=""/></td>
+								<td style="text-align:center;"><?php echo $result['price'].".00"; ?></td>
+								<td>
+									<form action="" method="post">
+										<input type="hidden" name="cartId" value="<?php echo $result['cartId']; ?>"/>
+										<input type="number" name="quantity" value="<?php echo $result['quantity']; ?>"/>
+										<input type="submit" name="submit" value="Update"/>
+									</form>
+								</td>
+								<td><?php
+                                $total =  $result['price'] * $result['quantity'];
+                                    echo number_format($total).".00"; ?></td>
+								<td><a onclick="return confirm('Are you sure to delete?');" href="?delpro=<?php echo $result['cartId']; ?>">X</a></td>
+							</tr>
+							<?php
+                            $qty = $qty + $result['quantity'];
+                                    $sum = $sum + $total;
+                                    Session::set("qty", $qty);
+									Session::set("gTotal", $sum); ?>
+							<?php
+                                }
+                            } ?>
+						</table>
+						<?php 
+                        $getData = $ct->checkCartItem();
+                        if ($getData) {
+                            ?>
+						<table style="float:right;text-align:left;" width="50%">
+							<tr>								
+								<th width="60%">Sub Total : </th>
+								<td><?php echo number_format($sum).".00"; ?></td>
+								
+							</tr>
+
+					   </table>
+					   <?php
+                        } else {
+                            header("Location:index.php");
+                            // echo 'Cart Empty ! Please shop now.';
+                        } ?>
+					</div>
+					<div class="shopping">
+						<div class="shopleft">
+							<a href="index.php"> <img src="images/shop.png" alt="" /></a>
+						</div>
+						<div class="shopright">
+							<a href="payment.php"> <img src="images/check.png" alt="" /></a>
+						</div>
+					</div>
+    	</div>  	
+       <div class="clear"></div>
+    </div>
+ </div>
+<?php include 'inc/footer.php'; ?>

@@ -1,54 +1,94 @@
-<?php include('includes/header.php');?>
+<?php include 'inc/header.php'; ?>
+<?php 
+$login = Session::get("cuslogin");
+if ($login == true) {
+    header("Location:order.php");
+}
+ ?>
+<?php 
 
-<div class="container">
-    <div class="card main bg-light">
-        <?php include('includes/logo.php');?>
-        <?php include('includes/navigation.php');?>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-header bg-info text-white text-center"><i class="fa fa-sign-in"></i> Connection
-                        </h5>
-                        <?php
-                              if (isset($_POST['send'])){
-                                  $email = escape_string($_POST['email']);
-                                  $passe = escape_string(sha1($_POST['passe']));
-                                  $sql = " SELECT * FROM users WHERE email='$email' AND password ='$passe' LIMIT 1 ";
-                                  $result = query($sql);
-                                  $user = fetch_array($result);
-                                  if ($user !== null){
-                                     $_SESSION['logged'] = true;
-                                     $_SESSION['nom'] = $user['username'] ;
-                                     $_SESSION['user_id'] = $user['id'] ;
-                                     redirect ("index.php");
-                                  }else{
-                                    echo' <div class="alert alert-danger mt-4">Email ou mot de passe est incorrect.</div>';
-                                  }
-
-                              }
-                             ?>
-                        <form action="login.php" method="post" class="mt-2">
-                            <div class="form-group">
-                                <label for="email">Email*</label>
-                                <input type="email" required name="email" placeholder="Entrer votre Email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="passe">Password*</label>
-                                <input type="password" required name="passe" placeholder="Entrer votre mot de passe"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" name="send" class="btn btn-primary">Valider</button>
-                            </div>
-                        </form>
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    $custLogin = $cmr->customerLogin($_POST);
+}
+?>
+ <div class="main">
+    <div class="content">
+    	 <div class="login_panel">
+    	 	<?php 
+            if (isset($custLogin)) {
+                echo $custLogin;
+            }
+             ?>
+        	<h3>Existing Customers</h3>
+        	<p>Sign in with the form below.</p>
+        	<form action="" method="post">
+                	<input name="email" placeholder="Email" type="text"/>
+                    <input name="pass" placeholder="Password" type="password"/>
+                 
+                 <p class="note">If you forgot your passoword just enter your email and click <a href="#">here</a></p>
+                    <div class="buttons"><div><button class="grey" name="login">Sign In</button></div></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <footer style="background-color: #e3f2fd;" class="mt-2">
-            <p class="lead text-center  mt-2">AmineShop&copy;2021</p>
-        </footer>
+                    </form>
+                    <?php 
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+    $customerReg = $cmr->customerRegistration($_POST);
+}
+?>
+    	<div class="register_account">
+    		<?php 
+            if (isset($customerReg)) {
+                echo $customerReg;
+            }
+             ?>
+    		<h3>Register New Account</h3>
+    		<form action="" method="post">
+		   			 <table>
+		   				<tbody>
+						<tr>
+						<td>
+							<div>
+							<input type="text" name="name" placeholder="Name"/>
+							</div>
+							<div>
+							<input type="text" name="address" placeholder="Address"/>
+							</div>
+							
+							<div>
+							   <input type="text" name="city" placeholder="City"/>
+							</div>
+							
+							<div>
+								<input type="text" name="zip" placeholder="Zip Code"/>
+							</div>
+							
+		    			 </td>
+		    			<td>
+		    				<div>
+								<input type="text" name="email" placeholder="Email"/>
+							</div>
+						<div>
+							<input type="text" name="country" placeholder="Country"/>
+						</div>
+		    			        
+	
+		           <div>
+		          <input type="text" name="phone" placeholder="Phone"/>
+		          </div>
+				  
+				  <div>
+					<input type="text" name="pass" placeholder="Password"/>
+				</div>
+		    	</td>
+		    </tr> 
+		    </tbody></table> 
+		   <div class="search"><div><button class="grey" name="register">Create Account</button></div></div>
+		    <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+		    <div class="clear"></div>
+		    </form>
+    	</div>  	
+       <div class="clear"></div>
     </div>
-    <?php include('includes/footer.php');?>
+ </div>
+<?php include 'inc/footer.php'; ?>
+
